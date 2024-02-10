@@ -56,6 +56,19 @@ void BrowserHistory::displayHistory() {
  */
 void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
     // TODO
+  
+  	if(previousPage == nullptr)
+    {
+      head = newPage;
+    }
+  	else{
+		WebPage* temp = previousPage->next;
+  
+  		//iteration goes here
+  
+  		previousPage->next = newPage;
+    	newPage->next = temp;
+	}
 }
 
 /*
