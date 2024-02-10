@@ -49,7 +49,7 @@ void BrowserHistory::displayHistory() {
   	// iteration goes here
     while(temp != NULL)
     {
-        cout << "[ID::" << temp->id << "]-(URL::" << temp->url << endl;
+        cout << "[ID::" << temp->id << "]-(URL::" << temp->url << ") -> ";
       	temp = temp->next;
     }
 }
