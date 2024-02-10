@@ -44,7 +44,14 @@ bool BrowserHistory::isEmpty() {
  * @return none
  */
 void BrowserHistory::displayHistory() {
-    // TODO
+    WebPage* temp = head->next;
+  
+  	// iteration goes here
+    while(temp != NULL)
+    {
+        cout << "[ID::" << temp->id << "]-(URL::" << endl;
+      	temp = temp->next;
+    }
 }
 
 /*
@@ -64,11 +71,14 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
   	else{
 		WebPage* temp = previousPage->next;
   
-  		//iteration goes here
-  
-  		previousPage->next = newPage;
-    	newPage->next = temp;
+  		// iteration goes here
+        while(temp->id != previousPage->id)
+        {
+        	temp = temp->next;
+        }
 	}
+    previousPage->next = newPage;
+    newPage->next = temp;
 }
 
 /*
