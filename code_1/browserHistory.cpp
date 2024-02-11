@@ -67,13 +67,24 @@ void BrowserHistory::displayHistory() {
  */
 void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
     // TODO
-    WebPage* temp = previousPage->next;
+    // WebPage* temp = previousPage->next;
 
   	if(previousPage == nullptr)
     {
-      	newPage->next = head;
-        head = newPage;
-
+      	if(head == nullptr)
+        {
+          head = newPage;
+          
+          head->next = nullptr;
+            
+        }
+      
+      	else
+        {
+        	newPage->next = head;
+        	head = newPage;
+        }
+      
         // If you are adding at the beginning, use this: 
         cout << "adding: " << "[" << newPage->id << "]-" << newPage->url << " (HEAD)\n";
     }
@@ -86,7 +97,7 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
         {
         	temp = temp->next;
         }
-      
+
       	if (temp != NULL)
         {
 			newPage->next = temp->next;
