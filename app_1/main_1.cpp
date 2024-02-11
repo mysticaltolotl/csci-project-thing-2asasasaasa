@@ -21,8 +21,10 @@ int main(int argc, char* argv[]) {
   
   	//define common vars
   	string newURL, prevURL, owner;
-    int id, option;
-    Webpage* temp;
+    int id;
+    int option;
+    WebPage* temp;
+    int prevID;
     
   	displayMenu();
     cin >> option;
@@ -37,7 +39,7 @@ int main(int argc, char* argv[]) {
     {
         displayMenu();
         cin >> option;
-        if(option == "1")
+        if(option == 1)
 
         {
             history.buildBrowserHistory();
@@ -45,7 +47,7 @@ int main(int argc, char* argv[]) {
             built = true;
         }
 
-        else if(option == "2")
+        else if(option == 2)
         {
             if(built)
             {
@@ -57,7 +59,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        else if(option == "3")
+        else if(option == 3)
         {
             cout << "Enter the new web page's url:" << endl;
             cin >> newURL;
@@ -70,21 +72,22 @@ int main(int argc, char* argv[]) {
             {
                 return; //return if the URL is already taken
             }
+
             if(prevURL == "First")
             {
-                int prevID = 10;
+                prevID = 10;
             }
             else
             {
                 temp = history.searchPageByURL(prevURL);
-                int prevID = prev->id;
+                prevID = temp->id;
             }
             cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID <<"])";
             
             history.updateViews(newURL);
         }
     
-        else if(option == "4")
+        else if(option == 4)
         {
             valid = false;
             while(!valid)
@@ -108,7 +111,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        else if(option == "5")
+        else if(option == 5)
         {
             cout << "Enter url of the web page to check the view count: " << endl;
             cin >> newURL;
@@ -123,7 +126,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        else if(option == "6")
+        else if(option == 6)
         {
             cout << "Quitting...Goodbye!\n";
             looping = false;
