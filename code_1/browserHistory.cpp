@@ -52,6 +52,8 @@ void BrowserHistory::displayHistory() {
         cout << "[ID::" << temp->id << "]-(URL::" << temp->url << ") -> ";
       	temp = temp->next;
     }
+  	
+  	cout << "NULL" << endl;
 }
 
 /*
@@ -87,7 +89,17 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
  * @return none
  */
 void BrowserHistory::buildBrowserHistory() {
-    // TODO
+	Website colorado = {10, 0, "https://www.colorado.edu/", "", 11};
+	Website wikipedia = {11, 0, "https://www.wikipedia.org/", "", 12};
+	Website brilliant = {12, 0, "https://brilliant.org/", "", 13};
+	Website khan = {13, 0, "https://www.khanacademy.org/", "", 14};
+	Website number = {14, 0, "https://www.numberphile.com/", "", NULL};
+  
+    addWebPage(nullptr, colorado);
+    addWebPage(colorado, wikipedia);
+    addWebPage(wikipedia, brilliant);
+  	addWebPage(brilliant, khan);
+  	addWebPage(khan, number);
 }
 
 
@@ -100,7 +112,19 @@ void BrowserHistory::buildBrowserHistory() {
  */
 WebPage* BrowserHistory::searchPageByID(int id) {
     // TODO
-    return nullptr;
+    WebPage* temp = head;
+  
+  	// iteration goes here
+    while(temp != NULL)
+    {
+        if(temp->id == id)
+        {
+        	return(temp);
+        }
+      	temp = temp->next;
+    }
+  	
+  	return NULL;
 }
 
 
@@ -113,7 +137,19 @@ WebPage* BrowserHistory::searchPageByID(int id) {
  */
 WebPage* BrowserHistory::searchPageByURL(std::string url) {
     // TODO
-    return nullptr;
+    WebPage* temp = head;
+  
+  	// iteration goes here
+    while(temp != NULL)
+    {
+        if(temp->url == url)
+        {
+        	return(temp);
+        }
+      	temp = temp->next;
+    }
+  	
+  	return NULL;
 }
 
 /*
