@@ -55,7 +55,9 @@ void BrowserHistory::displayHistory() {
 	// iteration goes here
 	while (temp != nullptr)
 	{
-		cout << "[ID::" << temp->id << "]-(URL::" << temp->url << ") -> ";
+        
+		cout << "[ID:: " << temp->id << "]-(URL::" << temp->url << ") -> ";
+        //cout << "|" << temp->id << "| ";
 		temp = temp->next;
       
      	counter++;

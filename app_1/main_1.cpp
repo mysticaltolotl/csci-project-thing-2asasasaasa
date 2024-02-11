@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <limits>
 #include "../code_1/browserHistory.hpp"
 
 using namespace std;
@@ -22,7 +23,7 @@ int main(int argc, char* argv[]) {
     // TODO
 
     //define common vars
-    string newURL, prevURL, owner;
+    string newURL, prevURL, ownerFirst, ownerLast, owner;
     int id;
     int option;
     WebPage* temp;
@@ -39,8 +40,24 @@ int main(int argc, char* argv[]) {
 
     while (looping)
     {
+      	option = 1;
         displayMenu();
         cin >> option;
+
+      if (cin.fail()) {
+          cout << "Invalid selection, please try again" << endl;
+          // Clear the error state
+          cin.clear();
+          // Discard the input buffer
+          cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      } else {
+          // Check if the input is within the specified range
+          if (option >= 1 && option <= 6) {
+              valid = true; //filler code
+          } else {
+              cout << "Invalid selection, please try again" << endl;
+          }
+      }
         if (option == 1)
 
         {
@@ -84,7 +101,7 @@ int main(int argc, char* argv[]) {
                 temp = history.searchPageByURL(prevURL);
                 prevID = temp->id;
             }
-            cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID << "])";
+            //cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID << "])";
           
           	WebPage* newPage = new WebPage{ id, 0, newURL, "", temp };
           
@@ -100,35 +117,45 @@ int main(int argc, char* argv[]) {
             {
                 cout << "Enter url of the web page to add the owner:" << endl;
                 cin >> newURL;
-                cout << "Enter the owner:";
-                cin >> owner;
 
-                history.addOwner(newURL, owner);
                 temp = history.searchPageByURL(newURL);
 
                 if (temp != NULL)
                 {
-                    cout << "The owner (" << owner << ") has been added for the ID - " << temp->id << endl;
+                    //cout << "The owner (" << owner << ") has been added for the ID - " << temp->id << endl;
+                    cout << "Enter the owner:";
+                    cin >> ownerFirst;
+                    cin >> ownerLast;
+                    owner = ownerFirst + " " + ownerLast;
+                    history.addOwner(newURL, owner);
                     valid = true;
-                }
 
-                cout << "Page not found. Try again." << endl;
+                }
+                else
+                {
+                    cout << "Page not found. Try again." << endl;
+                }
 
             }
         }
 
         else if (option == 5)
         {
-            cout << "Enter url of the web page to check the view count: " << endl;
-            cin >> newURL;
-            temp = history.searchPageByURL(newURL);
-            if (temp != NULL)
+            valid = false;
+            while (!valid)
             {
-                cout << "View count for URL - " << newURL << "is " << temp->views << endl;
-            }
-            else
-            {
-                cout << "View count for URL - " << newURL << "is 0" << endl;
+                cout << "Enter url of the web page to check the view count: " << endl;
+                cin >> newURL;
+                temp = history.searchPageByURL(newURL);
+                if (temp != NULL)
+                {
+                    cout << "View count for URL - " << newURL << " is " << temp->views << endl;
+                    valid = true;
+                }
+                else
+                {
+                    cout << "Page not found. Try again." << endl;
+                }
             }
         }
 
@@ -140,7 +167,11 @@ int main(int argc, char* argv[]) {
 
         else
         {
+            /*
             cout << "Invalid selection, please try again" << endl;
+          	cin.ignore(10000, '\n');
+          	cin.clear();
+            */
         }
     }
 
