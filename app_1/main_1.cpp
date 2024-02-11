@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     //displayMenu();
     //cin >> option;
 
-    bool built = false; // there's probably a more elegant way to see if a list has been built, but this works the same
+    //bool built = false; // there's probably a more elegant way to see if a list has been built, but this works the same
     bool valid = false;
     bool looping = true;
 
@@ -63,12 +63,12 @@ int main(int argc, char* argv[]) {
         {
             history.buildBrowserHistory();
             history.displayHistory();
-            built = true;
+            //built = true;
         }
 
         else if (option == 2)
         {
-            if (built && !(history.isEmpty()))
+            if (!(history.isEmpty()))
             {
                 history.displayHistory();
             }
@@ -95,6 +95,21 @@ int main(int argc, char* argv[]) {
                 break; //return if the URL is already taken
             }
 
+            temp = history.searchPageByURL(prevURL);
+
+            if(prevURL != "First")
+            {
+                while (temp == NULL)
+                {
+                    cout << "INVALID(previous page url)... Please enter a VALID previous page url!" << endl;
+                    cin >> prevURL;
+                    if(prevURL == "First")
+                    {
+                        break;
+                    }
+                    temp = history.searchPageByURL(prevURL);
+                }
+            }
         
             if (prevURL == "First")
             {
