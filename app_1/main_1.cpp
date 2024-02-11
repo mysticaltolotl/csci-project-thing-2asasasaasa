@@ -87,14 +87,18 @@ int main(int argc, char* argv[]) {
             cout << "Enter the previous page's url (or First):" << endl;
             cin >> prevURL;
 
+            temp = NULL;
+
+
             if (history.searchPageByURL(newURL) != NULL)
             {
                 break; //return if the URL is already taken
             }
 
+        
             if (prevURL == "First")
             {
-                prevID = 10;
+                prevID = id;
             }
             else
             {

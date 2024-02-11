@@ -52,18 +52,19 @@ void BrowserHistory::displayHistory() {
 
 	cout << "== CURRENT BROWSER HISTORY ==" << endl;
   
-	// iteration goes here
-	while (temp != nullptr)
-	{
+	if(!isEmpty())
+    {
+        while (temp != nullptr)
+        {
+            
+            cout << "[ID:: " << temp->id << "]-(URL::" << temp->url << ") -> ";
+            //cout << "|" << temp->id << "| ";
+            temp = temp->next;
         
-		cout << "[ID:: " << temp->id << "]-(URL::" << temp->url << ") -> ";
-        //cout << "|" << temp->id << "| ";
-		temp = temp->next;
-      
-     	counter++;
-	}
+        }
+    }
 
-    if(counter == 0)
+    else
     {
         cout << "Empty History" << endl;
     }
@@ -210,7 +211,7 @@ void BrowserHistory::addOwner(std::string url, string owner) {
 
 	WebPage* temp = searchPageByURL(url);
   
-  	if(temp == nullptr)
+  	if(temp == NULL)
     {
     	cout << "Page not found\n";
       	return;
