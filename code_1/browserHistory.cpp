@@ -45,6 +45,8 @@ bool BrowserHistory::isEmpty() {
  */
 void BrowserHistory::displayHistory() {
     WebPage* temp = head->next;
+
+    cout << "== CURRENT BROWSER HISTORY ==" << endl;
   
   	// iteration goes here
     while(temp != NULL)
@@ -53,7 +55,7 @@ void BrowserHistory::displayHistory() {
       	temp = temp->next;
     }
   	
-  	cout << "NULL" << endl;
+  	cout << "NULL" << endl << "===" << endl;
 }
 
 /*
@@ -68,7 +70,10 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
   
   	if(previousPage == nullptr)
     {
-      head = newPage;
+        head = newPage;
+
+        // If you are adding at the beginning, use this: 
+        cout << "adding: " << "[" << newPage->id << "]-" << newPage->url << " (HEAD)\n";
     }
   	else{
 		WebPage* temp = previousPage->next;
@@ -78,6 +83,9 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
         {
         	temp = temp->next;
         }
+
+        // Otherwise use this: 
+        cout << "adding: " << "[" << newPage->id << "]-" << newPage->url << " (prev: " << "[" << previousPage->id << "])\n";
 	}
     previousPage->next = newPage;
     newPage->next = temp;
@@ -160,8 +168,34 @@ WebPage* BrowserHistory::searchPageByURL(std::string url) {
  */
 void BrowserHistory::addOwner(std::string url, string owner) {
     // TODO
+
+    WebPage* temp = searchPageByURL(url);
+
+    temp->owner = owner;
+
+
+    while(temp != NULL)
+    {
+        cout << "The owner (" << temp->owner << ") has been added for the ID - "<< temp->id << "\n";
+
+        WebPage* temp = searchPageByURL(url);
+
+        temp->owner = owner;
+    }
+
+    cout << "The owner (" << temp->owner << ") has been added for the ID - "<< temp->id << "\n"; //it's a bit hacky, but it should work
+
 }
 
 void BrowserHistory::updateViews(string url) {
-    // TODO
+    WebPage* temp = searchPageByURL(url);
+
+    temp->views++;
+
+    while(temp != NULL)
+    {
+        WebPage* temp = searchPageByURL(url);
+
+        temp->views++;
+    }
 }
