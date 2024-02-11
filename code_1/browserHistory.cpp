@@ -97,12 +97,12 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
  * @return none
  */
 void BrowserHistory::buildBrowserHistory() {
-	Website colorado = {10, 0, "https://www.colorado.edu/", "", 11};
-	Website wikipedia = {11, 0, "https://www.wikipedia.org/", "", 12};
-	Website brilliant = {12, 0, "https://brilliant.org/", "", 13};
-	Website khan = {13, 0, "https://www.khanacademy.org/", "", 14};
-	Website number = {14, 0, "https://www.numberphile.com/", "", NULL};
-  
+	WebPage* number = new WebPage{14, 0, "https://www.numberphile.com/", "", NULL};
+	WebPage* khan = new WebPage{13, 0, "https://www.khanacademy.org/", "", number};
+	WebPage* brilliant = new WebPage{12, 0, "https://brilliant.org/", "", khan};
+	WebPage* wikipedia = new WebPage{11, 0, "https://www.wikipedia.org/", "", brilliant};
+    WebPage* colorado = new WebPage{10, 0, "https://www.colorado.edu/", "", wikipedia};
+
     addWebPage(nullptr, colorado);
     addWebPage(colorado, wikipedia);
     addWebPage(wikipedia, brilliant);
