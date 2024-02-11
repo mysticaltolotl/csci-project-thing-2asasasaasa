@@ -133,11 +133,11 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
  * @return none
  */
 void BrowserHistory::buildBrowserHistory() {
-	WebPage* number = new WebPage{ 14, 0, "https://www.numberphile.com/", "", NULL };
-	WebPage* khan = new WebPage{ 13, 0, "https://www.khanacademy.org/", "", number };
-	WebPage* brilliant = new WebPage{ 12, 0, "https://brilliant.org/", "", khan };
-	WebPage* wikipedia = new WebPage{ 11, 0, "https://www.wikipedia.org/", "", brilliant };
-	WebPage* colorado = new WebPage{ 10, 0, "https://www.colorado.edu/", "", wikipedia };
+	WebPage* number = new WebPage{14, 0, "https://www.numberphile.com/", "", NULL};
+	WebPage* khan = new WebPage{13, 0, "https://www.khanacademy.org/", "", number};
+	WebPage* brilliant = new WebPage{12, 0, "https://brilliant.org/", "", khan};
+	WebPage* wikipedia = new WebPage{11, 0, "https://www.wikipedia.org/", "", brilliant};
+	WebPage* colorado = new WebPage{10, 0, "https://www.colorado.edu/", "", wikipedia};
 
 	addWebPage(nullptr, colorado);
 	addWebPage(colorado, wikipedia);
@@ -186,7 +186,7 @@ WebPage* BrowserHistory::searchPageByURL(std::string url) {
 	// iteration goes here
 	while (temp != NULL)
 	{
-		cout << "Searching " << temp->url << "   for   " << url << endl;
+		//cout << "Searching " << temp->url << "   for   " << url << endl;
 		if (temp->url == url)
 		{
 			return(temp);
