@@ -85,6 +85,10 @@ int main(int argc, char* argv[]) {
                 prevID = temp->id;
             }
             cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID << "])";
+          
+          	WebPage* newPage = new WebPage{ id, 0, newURL, "", temp };
+          
+            history.addWebPage(temp, newPage);
 
             history.updateViews(newURL);
         }

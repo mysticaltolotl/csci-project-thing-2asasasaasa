@@ -24,7 +24,6 @@ using namespace std;
  */
 BrowserHistory::BrowserHistory() {
 	/*
-	DO NOT MODIFY THIS
 	This constructor is already complete.
 	*/
 	head = nullptr;
@@ -208,10 +207,16 @@ void BrowserHistory::addOwner(std::string url, string owner) {
 	// TODO
 
 	WebPage* temp = searchPageByURL(url);
+  
+  	if(temp == nullptr)
+    {
+    	cout << "Page not found\n";
+      	return;
+    }
 
 	temp->owner = owner;
 
-
+	/*
 	while (temp != NULL)
 	{
 		cout << "The owner (" << temp->owner << ") has been added for the ID - " << temp->id << "\n";
@@ -220,7 +225,7 @@ void BrowserHistory::addOwner(std::string url, string owner) {
 
 		temp->owner = owner;
 	}
-
+	*/
 	cout << "The owner (" << temp->owner << ") has been added for the ID - " << temp->id << "\n"; //it's a bit hacky, but it should work
 
 }
