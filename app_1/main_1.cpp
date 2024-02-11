@@ -11,35 +11,35 @@ void displayMenu();
 int main(int argc, char* argv[]) {
 
     // DO NOT MODIFY THIS.
-    if(argc>1) 
+    if (argc > 1)
     {
-        freopen(argv[1],"r",stdin);
+        freopen(argv[1], "r", stdin);
     }
     // DO NOT MODIFY ABOVE.
 
     // TODO
-  
-  	//define common vars
-  	string newURL, prevURL, owner;
+
+    //define common vars
+    string newURL, prevURL, owner;
     int id;
     int option;
     WebPage* temp;
     int prevID;
-    
-  	displayMenu();
-    cin >> option;
-  
-  	bool built = false; // there's probably a more elegant way to see if a list has been built, but this works the same
+
+    //displayMenu();
+    //cin >> option;
+
+    bool built = false; // there's probably a more elegant way to see if a list has been built, but this works the same
     bool valid = false;
     bool looping = true;
-  
-  	BrowserHistory history;
-    
-    while(looping)
+
+    BrowserHistory history;
+
+    while (looping)
     {
         displayMenu();
         cin >> option;
-        if(option == 1)
+        if (option == 1)
 
         {
             history.buildBrowserHistory();
@@ -47,19 +47,19 @@ int main(int argc, char* argv[]) {
             built = true;
         }
 
-        else if(option == 2)
+        else if (option == 2)
         {
-            if(built)
+            if (built)
             {
                 history.displayHistory();
             }
             else
             {
-            cout << "== CURRENT BROWSER HISTORY ==" << endl << "NULL" << endl << "===" << endl;
+                cout << "== CURRENT BROWSER HISTORY ==" << endl << "NULL" << endl << "===" << endl;
             }
         }
 
-        else if(option == 3)
+        else if (option == 3)
         {
             cout << "Enter the new web page's url:" << endl;
             cin >> newURL;
@@ -67,13 +67,13 @@ int main(int argc, char* argv[]) {
             cin >> id;
             cout << "Enter the previous page's url (or First):" << endl;
             cin >> prevURL;
-            
-            if(history.searchPageByURL(newURL) != NULL)
+
+            if (history.searchPageByURL(newURL) != NULL)
             {
                 break; //return if the URL is already taken
             }
 
-            if(prevURL == "First")
+            if (prevURL == "First")
             {
                 prevID = 10;
             }
@@ -82,15 +82,15 @@ int main(int argc, char* argv[]) {
                 temp = history.searchPageByURL(prevURL);
                 prevID = temp->id;
             }
-            cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID <<"])";
-            
+            cout << "adding: [" << id << "]-" << newURL << " (prev: [" << prevID << "])";
+
             history.updateViews(newURL);
         }
-    
-        else if(option == 4)
+
+        else if (option == 4)
         {
             valid = false;
-            while(!valid)
+            while (!valid)
             {
                 cout << "Enter url of the web page to add the owner:" << endl;
                 cin >> newURL;
@@ -99,24 +99,24 @@ int main(int argc, char* argv[]) {
 
                 history.addOwner(newURL, owner);
                 temp = history.searchPageByURL(newURL);
-                
-                if(temp != NULL)
+
+                if (temp != NULL)
                 {
-                cout << "The owner (" << owner << ") has been added for the ID - " << temp->id << endl;
-                valid = true;
+                    cout << "The owner (" << owner << ") has been added for the ID - " << temp->id << endl;
+                    valid = true;
                 }
-                
+
                 cout << "Page not found. Try again." << endl;
 
             }
         }
 
-        else if(option == 5)
+        else if (option == 5)
         {
             cout << "Enter url of the web page to check the view count: " << endl;
             cin >> newURL;
             temp = history.searchPageByURL(newURL);
-            if(temp != NULL)
+            if (temp != NULL)
             {
                 cout << "View count for URL - " << newURL << "is " << temp->views << endl;
             }
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        else if(option == 6)
+        else if (option == 6)
         {
             cout << "Quitting...Goodbye!\n";
             looping = false;
@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
             cout << "Invalid selection, please try again" << endl;
         }
     }
-    
+
     return 0;
 }
 
