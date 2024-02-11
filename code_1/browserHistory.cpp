@@ -1,3 +1,6 @@
+//browserHistory.cpp
+//browserHistory.cpp
+
 /*************************************************************/
 /*                BrowserHistory Definition                  */
 /*************************************************************/
@@ -46,14 +49,23 @@ bool BrowserHistory::isEmpty() {
 void BrowserHistory::displayHistory() {
 	WebPage* temp = head;
 
-	cout << "== CURRENT BROWSER HISTORY ==" << endl;
+    int counter = 0;
 
+	cout << "== CURRENT BROWSER HISTORY ==" << endl;
+  
 	// iteration goes here
-	while (temp != NULL)
+	while (temp != nullptr)
 	{
 		cout << "[ID::" << temp->id << "]-(URL::" << temp->url << ") -> ";
 		temp = temp->next;
+      
+     	counter++;
 	}
+
+    if(counter == 0)
+    {
+        cout << "Empty History" << endl;
+    }
 
 	cout << "NULL" << endl << "===" << endl;
 }
@@ -69,15 +81,17 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
 	// TODO
 	// WebPage* temp = previousPage->next;
 
+	if (newPage == nullptr) {
+        cout << "No page provided to add\n";
+        return;
+    }
 	if (previousPage == nullptr)
 	{
 		if (head == nullptr)
 		{
 			head = newPage;
 			head->next = nullptr;
-
 		}
-
 		else
 		{
 			newPage->next = head;
@@ -89,7 +103,7 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
 	}
 	else {
 
-		WebPage* temp = head;
+/*		WebPage* temp = head;
 
 		// iteration goes here
 		while (temp->id != previousPage->id)
@@ -107,6 +121,9 @@ void BrowserHistory::addWebPage(WebPage* previousPage, WebPage* newPage) {
 			previousPage->next = newPage;
 			newPage->next = temp;
 		}
+ */
+        newPage->next = previousPage->next;
+        previousPage->next = newPage;
 		cout << "adding: " << "[" << newPage->id << "]-" << newPage->url << " (prev: " << "[" << previousPage->id << "])\n";
 	}
 }
@@ -212,12 +229,13 @@ void BrowserHistory::updateViews(string url) {
 	WebPage* temp = searchPageByURL(url);
 	if (temp != NULL) {
 		temp->views++;
-
+/*
 		while (temp != NULL)
 		{
 			WebPage* temp = searchPageByURL(url);
 
 			temp->views++;
 		}
+*/
 	}
 }

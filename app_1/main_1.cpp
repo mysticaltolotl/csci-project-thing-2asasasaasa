@@ -1,3 +1,5 @@
+//main_1.cpp
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -49,13 +51,13 @@ int main(int argc, char* argv[]) {
 
         else if (option == 2)
         {
-            if (built)
+            if (built && !(history.isEmpty()))
             {
                 history.displayHistory();
             }
             else
             {
-                cout << "== CURRENT BROWSER HISTORY ==" << endl << "NULL" << endl << "===" << endl;
+                cout << "== CURRENT BROWSER HISTORY ==\nEmpty History\nNULL\n===\n";
             }
         }
 
