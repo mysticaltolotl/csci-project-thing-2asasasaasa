@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
             
             if(history.searchPageByURL(newURL) != NULL)
             {
-                return; //return if the URL is already taken
+                break; //return if the URL is already taken
             }
 
             if(prevURL == "First")
